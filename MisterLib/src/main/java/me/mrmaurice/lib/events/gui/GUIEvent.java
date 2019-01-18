@@ -1,5 +1,5 @@
 package me.mrmaurice.lib.events.gui;
 
-public class GUIEvent {
+public interface GUIEvent {
 
 }
