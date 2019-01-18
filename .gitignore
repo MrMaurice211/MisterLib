@@ -1,11 +1,6 @@
-/.project
-
-/.classpath
-
-/.settings
-
-/.gradle/
-
-/bin/
-
-/build/
+*intelliJ
+*.iml
+target/
+.classpath
+.project
+.settings/org.eclipse.jdt.core.prefs
