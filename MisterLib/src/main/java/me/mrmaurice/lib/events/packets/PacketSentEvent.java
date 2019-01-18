@@ -9,9 +9,13 @@ public class PacketSentEvent extends PacketEvent {
 		super(packet);
 	}
 
-	@Override
+	private static final HandlerList handlers = new HandlerList();
+
 	public HandlerList getHandlers() {
-		return null;
+	    return handlers;
 	}
 
+	public static HandlerList getHandlerList() {
+	    return handlers;
+	}
 }

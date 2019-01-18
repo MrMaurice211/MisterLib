@@ -2,7 +2,7 @@ package me.mrmaurice.lib.gui;
 
 import java.util.Map;
 
-import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.entity.Player;
 
 import com.google.common.collect.Maps;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class GUI<T> implements InventoryHolder {
+public abstract class GUI<T> {
 
 	@Setter(AccessLevel.NONE)
 	private Map<String, GUI<?>> childs = Maps.newHashMap();
@@ -20,7 +20,6 @@ public abstract class GUI<T> implements InventoryHolder {
 	private Map<String, Object> data = Maps.newHashMap();
 
 	private boolean closeable = true;
-
 	private GUI<?> parent;
 
 	@SuppressWarnings("unchecked")
@@ -56,5 +55,7 @@ public abstract class GUI<T> implements InventoryHolder {
 	}
 
 	public abstract T build();
+	
+	public abstract void close(Player player);
 
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 
 import com.google.common.collect.Lists;
 
@@ -21,7 +23,7 @@ import me.mrmaurice.lib.gui.enums.Rows;
 
 @Getter
 @Setter
-public class MenuGUI extends GUI<Inventory> {
+public class MenuGUI extends GUI<Inventory> implements InventoryHolder {
 
 	@Setter(AccessLevel.NONE)
 	private List<GUIPane> panes = Lists.newArrayList();
@@ -106,6 +108,11 @@ public class MenuGUI extends GUI<Inventory> {
 		inventory = Bukkit.createInventory(this, size.toSlots(), title);
 		setContent();
 		return inventory;
+	}
+
+	@Override
+	public void close(Player player) {
+		player.closeInventory();
 	}
 
 }
