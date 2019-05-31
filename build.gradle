@@ -1,7 +1,7 @@
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven'
-  version = '1.0-GUI'
+  version '1.0-GUI'
 
   repositories {
     maven { url "http://mrmaurice.me:8081/repository/mister-repo/" }
