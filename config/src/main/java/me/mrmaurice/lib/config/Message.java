@@ -44,7 +44,7 @@ public class Message {
 	}
 
 	public Message pref() {
-		msg = prefix + msg;
+		msg = Configs.getPrefix() + msg;
 		return this;
 	}
 
@@ -79,7 +79,5 @@ public class Message {
 			return Util.color(msg);
 		return msg;
 	}
-
-	private static String prefix = ConfigManager.of("config").get("prefix", "&9&lServer &7» ");
 
 }
