@@ -28,7 +28,7 @@ public class Util {
 	}
 
 	public static String uncolor(String message) {
-		return message.replaceAll("(?i)(&|§)[0-9A-FK-OR]", "");
+		return message.replaceAll("(?i)(&|" + ChatColor.COLOR_CHAR + ")[0-9A-FK-OR]", "");
 	}
 
 	public static List<String> uncolorList(List<String> l) {
