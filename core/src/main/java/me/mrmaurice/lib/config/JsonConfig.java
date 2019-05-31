@@ -1,29 +1,16 @@
 package me.mrmaurice.lib.config;
 
-import java.io.File;
 import java.util.Map;
-import java.util.function.Predicate;
-
-import org.bukkit.configuration.serialization.ConfigurationSerializable;
 
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
-
-// import me.mrmaurice.lib.reflections.ReConstructor;
-// import me.mrmaurice.lib.reflections.ReMethod;
-// import me.mrmaurice.lib.reflections.Reflections;
-import me.mrmaurice.lib.utils.FileUtil;
 
 public class JsonConfig {
 
 	// private static JsonParser parser = new JsonParser();
-	// private static Gson pretty = new
-	// GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	private static Gson pretty = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	private Map<String, Object> values = Maps.newHashMap();
 	// private static Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 	//
 	// private Map<String, JsonElement> values = Maps.newHashMap();
