@@ -3,15 +3,16 @@ deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
   file_glob: true
-  file: **/build/libs/*
+  file: "${RELEASE_PKG_FILE}"
   skip_cleanup: true
   on:
     tags: false
 before_deploy:
       - git config --local user.name "MrMaurice211"
       - git config --local user.email "t_ulu_m@live.com.mx"
+      - export RELEASE_PKG_FILE=$(ls *.jar)
       - export GRADLE_PATH=./build.gradle
-      - export GRADLE_FIELD="version"   # field name
+      - export GRADLE_FIELD="version"
       - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
       - export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')
       - export GIT_TAG=$TRAVIS_BRANCH-$VERSION
