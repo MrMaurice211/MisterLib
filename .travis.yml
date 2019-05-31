@@ -1,1 +1,9 @@
 language: java
+deploy:
+  provider: releases
+  api_key: "32fd864ebf36053926d137363ddb9b2ffb937821"
+  file_glob: true
+  file: /*
+  skip_cleanup: true
+  on:
+    tags: true
