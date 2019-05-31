@@ -8,8 +8,21 @@ deploy:
   on:
     tags: false
 before_deploy:
-      # Set up git user name and tag this commit
       - git config --local user.name "MrMaurice211"
       - git config --local user.email "t_ulu_m@live.com.mx"
-      - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-      - git tag $TRAVIS_TAG
+      - export GRADLE_PATH=./build.gradle   # path to the gradle file
+      - export GRADLE_FIELD="version"   # field name
+      - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')    # get value versionName"0.1.0"
+      - export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')  # remove quotes 0.1.0
+      - export GIT_TAG=$TRAVIS_BRANCH-$VERSION
+      - echo gradle version: $VERSION
+      - echo release tag: $GIT_TAG
+      #- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+      - git tag $GIT_TAG
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

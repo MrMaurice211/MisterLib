@@ -1,6 +1,7 @@
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven'
+  version = '1.0-GUI'
 
   repositories {
     maven { url "http://mrmaurice.me:8081/repository/mister-repo/" }
@@ -16,16 +17,3 @@ allprojects {
     }
   }
 }
-
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: "http://mrmaurice.me:8081/repository/maven-releases/") {
-//                authentication(userName: project.maven_username, password: project.maven_password)
-//            }
-//            pom.version = "1.3.7-GUI"
-//            pom.artifactId = "misterlib"
-//            pom.groupId = "me.mrmaurice"
-//        }
-//    }
-//}
