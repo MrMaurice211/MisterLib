@@ -6,7 +6,7 @@ deploy:
   file: build/libs/*
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
 before_deploy:
       # Set up git user name and tag this commit
       - git config --local user.name "MrMaurice211"
