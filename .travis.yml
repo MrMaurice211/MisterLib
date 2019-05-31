@@ -3,7 +3,13 @@ deploy:
   provider: releases
   api_key: "32fd864ebf36053926d137363ddb9b2ffb937821"
   file_glob: true
-  file: /*
+  file: build/libs/*
   skip_cleanup: true
   on:
     tags: true
+before_deploy:
+      # Set up git user name and tag this commit
+      - git config --local user.name "MrMaurice211"
+      - git config --local user.email "t_ulu_m@live.com.mx"
+      - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+      - git tag $TRAVIS_TAG
