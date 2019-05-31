@@ -10,10 +10,10 @@ deploy:
 before_deploy:
       - git config --local user.name "MrMaurice211"
       - git config --local user.email "t_ulu_m@live.com.mx"
-      - export GRADLE_PATH=./build.gradle   # path to the gradle file
+      - export GRADLE_PATH=./build.gradle
       - export GRADLE_FIELD="version"   # field name
-      - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')    # get value versionName"0.1.0"
-      - export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')  # remove quotes 0.1.0
+      - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
+      - export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')
       - export GIT_TAG=$TRAVIS_BRANCH-$VERSION
       - git tag $GIT_TAG
 before_cache:
