@@ -1,27 +1,27 @@
 language: java
-deploy:
-  provider: releases
-  api_key: $GITHUB_TOKEN
-  file_glob: true
-  file: "*/build/libs/*.jar"
-  skip_cleanup: true
-  on:
-    tags: false
 before_deploy:
-      - git config --local user.name "MrMaurice211"
-      - git config --local user.email "t_ulu_m@live.com.mx"
-      - export GRADLE_PATH=./build.gradle
-      - export GRADLE_FIELD="version"
-      - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
-      - export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')
-      - export GIT_TAG=$VERSION
-      - git tag $GIT_TAG
+- git config --local user.name "MrMaurice211"
+- git config --local user.email "t_ulu_m@live.com.mx"
+- export GRADLE_PATH=./build.gradle
+- export GRADLE_FIELD="version"
+- export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
+- export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')
+- export GIT_TAG=$VERSION
+- git tag $GIT_TAG
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-script:
-  - ./gradlew clean assemble
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+install: "./gradlew clean assemble"
+deploy:
+  provider: releases
+  file_glob: true
+  skip_cleanup: true  
+  api_key:
+    secure: kZ89GSGV0D3n8CSv13VTIV9CrU3IO3tuF2BYAIpdZwM8kcjHC5ftTh/EUzIAc0lQzdg/rYXhiO71KNPLsup5FiA43ARRrSo+wcQlrFOgG1aGsUnVBnpRpgWM0+nTWv9vLrJdRxW0mchSL1Xq0cSd3P3DCItjYO2WiDPTpIenkryz4V7iPyQYdYboCol0wfNvlfATJw9Frqcaecg+XjTQ1v3K/nqinCEXmL6YIhv0Irg1O22Sz5PLFBiqQVz24uLp7jUwigEZlUrLTlXf8yYs++mHrTS3+S+9pw4OcbT637NFVggublry6hGWdcuZ+Vwba6vSfFJt9xPbwAm0eWLbg1KDcBsEH3XLj4vXymzS9xDtnfRTHqpDo7G8QMuVUewXNcnWo+gXPBtw2cPVgLftj/lSlQeDf3ZmSuWhV2fgveMIk/SWuCF+xa5UbrO8Tr/3mF93xVk1ZHAe7A1TQ4cdvUaPiD7oOCDGqqJBbPdmTqe+P0YUj7aNj+VR6geogNKBhLPQR4P4xvK/59TEsA0vHXBWMzjrlszc3CnrUyhU9a1MexGBjdGyuF0LTF6yOmNM9Zz1uA5LdIIsqbiU/TK62aXynRg9+00/CwS9hLAecXS5aAFWgy/UMsr4UNfhczaozjQfYdCAGagyzKV0sw5w4PcuTAmJ0nCCWKRO0AsW0oE=
+  file: "*/build/libs/*.jar"
+  on:
+    repo: MrMaurice211/MisterLib

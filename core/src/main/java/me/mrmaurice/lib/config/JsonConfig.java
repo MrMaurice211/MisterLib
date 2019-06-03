@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
 public class JsonConfig {
 
 	// private static JsonParser parser = new JsonParser();
-	private static Gson pretty = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	private static Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 	private Map<String, Object> values = Maps.newHashMap();
 	// private static Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 	//
