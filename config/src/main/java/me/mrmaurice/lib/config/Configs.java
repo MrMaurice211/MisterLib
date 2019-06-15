@@ -8,7 +8,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.google.common.collect.Maps;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class Configs {
 
 	@Getter

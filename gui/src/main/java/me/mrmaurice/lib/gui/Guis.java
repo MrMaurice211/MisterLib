@@ -12,7 +12,7 @@ public class Guis {
 	@Getter
 	private static JavaPlugin instance;
 	@Getter
-	private static String textGUI_prefix;
+	private static String textGUIPrefix;
 
 	public static void check() {
 		if (instance == null)

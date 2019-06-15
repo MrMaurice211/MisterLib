@@ -4,19 +4,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class FileUtil {
 
 	public static List<String> readFile(File file) {
 		try {
-			return Files.readAllLines(file.toPath(), Charsets.UTF_8);
+			return Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
 		} catch (Exception e) {
 			return Lists.newArrayList();
 		}
@@ -37,8 +40,10 @@ public class FileUtil {
 
 	public static void writeFile(File file, List<String> toWrite) {
 		try {
-			Files.write(file.toPath(), toWrite, Charsets.UTF_8);
-		} catch (Exception e) {}
+			Files.write(file.toPath(), toWrite, StandardCharsets.UTF_8);
+		} catch (Exception e) {
+			Util.exception(e);
+		}
 	}
 
 	public static void writeFile(File file, String... toWrite) {

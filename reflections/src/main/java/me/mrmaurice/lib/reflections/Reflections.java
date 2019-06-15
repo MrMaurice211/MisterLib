@@ -25,6 +25,7 @@ import com.google.common.io.Files;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.UtilityClass;
+import me.mrmaurice.lib.utils.Util;
 
 @UtilityClass
 public class Reflections {
@@ -64,23 +65,25 @@ public class Reflections {
 		return getVersion().getVersionClass(clazz);
 	}
 
-	public static List<ReClass> getAllClasses(String packageName, File file) throws IOException {
+	public static List<ReClass> getAllClasses(String packageName, File file) {
 
 		List<ReClass> clazzez = Lists.newArrayList();
 
-		JarFile jf = new JarFile(file);
-		Enumeration<JarEntry> entries = jf.entries();
+		try (JarFile jf = new JarFile(file)) {
+			Enumeration<JarEntry> entries = jf.entries();
 
-		while (entries.hasMoreElements()) {
-			JarEntry entry = entries.nextElement();
-			String name = entry.getName().replace('/', '.');
-			if (name.startsWith(packageName) && name.endsWith(".class")) {
-				String className = name.substring(0, name.length() - 6);
-				ReClass clazz = getClass(className);
-				clazzez.add(clazz);
+			while (entries.hasMoreElements()) {
+				JarEntry entry = entries.nextElement();
+				String name = entry.getName().replace('/', '.');
+				if (name.startsWith(packageName) && name.endsWith(".class")) {
+					String className = name.substring(0, name.length() - 6);
+					ReClass clazz = getClass(className);
+					clazzez.add(clazz);
+				}
 			}
+		} catch (IOException e) {
+			Util.exception(e);
 		}
-		jf.close();
 		return clazzez;
 	}
 
@@ -127,8 +130,12 @@ public class Reflections {
 	}
 
 	public static Object getConnection(Player player) {
-		Object entityPlayer = getMethod(player.getClass(), "getHandle").invoke(player);
-		return getField(entityPlayer.getClass(), "playerConnection").get(entityPlayer);
+		ReMethod getHandle = getMethod(player.getClass(), "getHandle");
+		if (getHandle == null)
+			return null;
+		Object entityPlayer = getHandle.invoke(player);
+		ReField playerConn = getField(entityPlayer.getClass(), "playerConnection");
+		return playerConn == null ? null : playerConn.get(entityPlayer);
 	}
 
 	public static void broadcastPacket(Object packet) {
@@ -141,7 +148,15 @@ public class Reflections {
 			return;
 
 		ReClass packetClazz = getNetClass("Packet");
+		if (packetClazz == null)
+			return;
 		Object conn = getConnection(player);
+		if (conn == null)
+			return;
+		// ReMethod send = getMethod(conn.getClass(), "sendPacket",
+		// packetClazz.getObject());
+		// if (send != null)
+		// send.invoke(conn, packet);
 		getMethod(conn.getClass(), "sendPacket", packetClazz.getObject()).invoke(conn, packet);
 	}
 
@@ -182,7 +197,7 @@ public class Reflections {
 	public static ReMethod getMethod(Class<?> clazz, Predicate<Method> filter, Class<?>... params) {
 
 		if (clazz.getDeclaredMethods().length == 0)
-			return null;
+			throw new ReException("There is no methods on the class " + clazz.getSimpleName());
 
 		if (params.length > 0)
 			filter = filter.and(m -> Arrays.equals(params, m.getParameterTypes()));

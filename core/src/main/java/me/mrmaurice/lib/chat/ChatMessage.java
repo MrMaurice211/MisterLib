@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lombok.experimental.UtilityClass;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -24,9 +25,10 @@ import net.md_5.bungee.api.chat.TextComponent;
  *
  * @author BananaPuncher714
  */
+@UtilityClass
 public class ChatMessage {
-	
-	private final static char PLACEHOLDER = '\u02A7';
+
+	private static final char PLACEHOLDER = '\u02A7';
 
 	/**
 	 * Gets a TextComponent from a message
@@ -60,7 +62,7 @@ public class ChatMessage {
 
 		BaseComponent last = new TextComponent("");
 
-		List<TextComponent> actions = new ArrayList<TextComponent>();
+		List<TextComponent> actions = new ArrayList<>();
 		// This is where we start looking for B+ formatting
 		if (readExtra) {
 			// Thanks to StarShadow#3546 for negative look behind
@@ -181,7 +183,7 @@ public class ChatMessage {
 	private static List<String> getMatches(String string, String regex) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(string);
-		List<String> matches = new ArrayList<String>();
+		List<String> matches = new ArrayList<>();
 		while (matcher.find()) {
 			matches.add(matcher.group(1));
 		}

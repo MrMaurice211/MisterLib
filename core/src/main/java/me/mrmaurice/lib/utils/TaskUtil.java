@@ -3,8 +3,10 @@ package me.mrmaurice.lib.utils;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 
+import lombok.experimental.UtilityClass;
 import me.mrmaurice.lib.MisterLib;
 
+@UtilityClass
 public class TaskUtil {
 
 	private static BukkitScheduler scheduler = MisterLib.getInstance().getServer().getScheduler();

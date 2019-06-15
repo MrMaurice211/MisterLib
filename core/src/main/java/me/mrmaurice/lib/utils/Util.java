@@ -14,11 +14,15 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Lists;
 
+import lombok.experimental.UtilityClass;
 import me.mrmaurice.lib.MisterLib;
 import net.md_5.bungee.api.chat.TextComponent;
 
+@UtilityClass
 public class Util {
 
+	private static final String RESET = "\033[0m";
+	
 	public static String color(String msg) {
 		return ChatColor.translateAlternateColorCodes('&', msg);
 	}
@@ -35,22 +39,28 @@ public class Util {
 		return l.stream().map(Util::uncolor).collect(Collectors.toList());
 	}
 
-	public static long generateRandomNumber(int n) {
+	public static long generateRandomNumber(double n) {
 		long min = (long) Math.pow(10, n - 1);
 		return ThreadLocalRandom.current().nextLong(min, min * 10);
 	}
 
 	public static void info(String info) {
 		MisterLib.check();
-		String ns = "\033[36m" + info + "\033[m";
-		MisterLib.getInstance().getLogger().info(uncolor(ns));
+		String ns = uncolor("\033[36m" + info + RESET);
+		MisterLib.getInstance().getLogger().info(ns);
 	}
 
 	public static Void error(String error) {
 		MisterLib.check();
-		String ns = "\033[31m" + error + "\033[m";
-		MisterLib.getInstance().getLogger().severe(uncolor(ns));
+		String ns = uncolor("\033[31m" + error + RESET);
+		MisterLib.getInstance().getLogger().severe(ns);
 		return null;
+	}
+
+	public static void exception(Throwable ex) {
+		MisterLib.check();
+		String ns = uncolor("\033[33m" + ex + RESET);
+		MisterLib.getInstance().getLogger().warning(ns);
 	}
 
 	public static void sendComp(Player sender, TextComponent msg) {
@@ -69,7 +79,7 @@ public class Util {
 			in.close();
 			return rs;
 		} catch (Exception e) {
-			e.printStackTrace();
+			exception(e);
 			return Lists.newArrayList();
 		}
 	}

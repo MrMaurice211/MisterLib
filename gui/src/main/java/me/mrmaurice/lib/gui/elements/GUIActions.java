@@ -15,13 +15,15 @@ public class GUIActions {
 
 	private GUIActions() {}
 
+	private static final String REASON = "close_reason";
+
 	public static final Consumer<GUIEvent> RETURN = event -> {
 		GUI<?> gui = event.getAffectedGUI();
 		GUI<?> parent = gui.getParent();
 		if (parent == null)
 			return;
 		Player player = event.getResponsible();
-		gui.setData("close_reason", "return");
+		gui.setData(REASON, "return");
 		gui.close(player);
 		if (parent instanceof MenuGUI)
 			player.openInventory((Inventory) gui.build());
@@ -35,7 +37,7 @@ public class GUIActions {
 		if (parent == null)
 			return;
 		Player player = event.getResponsible();
-		gui.setData("close_reason", "hard_return");
+		gui.setData(REASON, "hard_return");
 		gui.close(player);
 		if (parent instanceof MenuGUI)
 			player.openInventory((Inventory) gui.build());
@@ -51,13 +53,13 @@ public class GUIActions {
 
 	public static final Consumer<GUIEvent> CLOSE = event -> {
 		GUI<?> gui = event.getAffectedGUI();
-		gui.setData("close_reason", "close");
+		gui.setData(REASON, "close");
 		gui.close(event.getResponsible());
 	};
 
 	public static final Consumer<GUIEvent> HIDE = event -> {
 		GUI<?> gui = event.getAffectedGUI();
-		gui.setData("close_reason", "hide");
+		gui.setData(REASON, "hide");
 		gui.close(event.getResponsible());
 	};
 
@@ -68,11 +70,11 @@ public class GUIActions {
 
 		public Consumer<GUIEvent> get(String data) {
 			return event -> {
-				GUI<?> gui = (MenuGUI) event.getAffectedGUI();
+				GUI<?> gui = event.getAffectedGUI();
 				GUI<?> child = gui.getChild(data);
 				if (child == null)
 					throw new IllegalArgumentException("Child GUI " + data + " does not exists.");
-				gui.setData("close_reason", "hide");
+				gui.setData(REASON, "hide");
 				gui.close(event.getResponsible());
 				child.build();
 			};

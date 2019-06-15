@@ -3,7 +3,6 @@ package me.mrmaurice.lib.config;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -13,8 +12,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.google.common.collect.Lists;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import me.mrmaurice.lib.utils.Util;
 
+@UtilityClass
 public class ConfigManager {
 
 	private static File dataFolder;
@@ -40,7 +41,7 @@ public class ConfigManager {
 		@Getter
 		private String configName;
 		private File configFile;
-		private YamlConfiguration config;
+		private YamlConfiguration yamlConfig;
 
 		public Config(String name) {
 			configName = name + ".yml";
@@ -49,7 +50,7 @@ public class ConfigManager {
 
 		public Config save() {
 			try {
-				config.save(configFile);
+				yamlConfig.save(configFile);
 			} catch (Exception e) {
 				Util.error("Error saving the config file.");
 			}
@@ -57,22 +58,22 @@ public class ConfigManager {
 		}
 
 		public Configuration get() {
-			if (config == null)
+			if (yamlConfig == null)
 				reload();
 
-			return config;
+			return yamlConfig;
 		}
 
 		public Config reload() {
 
 			try (InputStream is = getClass().getResourceAsStream("/" + configName)) {
 				if (!configFile.exists()) {
-					Files.copy(is, configFile.toPath(), new CopyOption[0]);
+					Files.copy(is, configFile.toPath());
 				}
-				config = YamlConfiguration.loadConfiguration(configFile);
+				yamlConfig = YamlConfiguration.loadConfiguration(configFile);
 			} catch (IOException e) {
 				Util.error("Error reloading the config");
-				e.printStackTrace();
+				Util.exception(e);
 			}
 			return this;
 		}

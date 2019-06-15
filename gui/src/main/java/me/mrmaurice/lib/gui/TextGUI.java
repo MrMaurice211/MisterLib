@@ -22,7 +22,7 @@ public class TextGUI extends GUI<Conversation> {
 	}
 
 	public TextGUI prefix() {
-		factory.withPrefix(arg -> Guis.getTextGUI_prefix());
+		factory.withPrefix(arg -> Guis.getTextGUIPrefix());
 		return this;
 	}
 
@@ -37,7 +37,7 @@ public class TextGUI extends GUI<Conversation> {
 	}
 
 	public TextGUI onEnd(Consumer<ConversationAbandonedEvent> func) {
-		factory.addConversationAbandonedListener(event -> func.accept(event));
+		factory.addConversationAbandonedListener(func::accept);
 		return this;
 	}
 

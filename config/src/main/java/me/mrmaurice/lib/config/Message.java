@@ -65,7 +65,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		msg = msg + toAppend.stream().map(m -> m.toString()).collect(Collectors.joining());
+		msg = msg + toAppend.stream().map(Message::toString).collect(Collectors.joining());
 
 		Matcher matcher = patt.matcher(msg);
 		while (matcher.find()) {

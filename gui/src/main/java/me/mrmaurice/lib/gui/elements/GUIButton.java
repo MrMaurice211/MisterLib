@@ -119,7 +119,7 @@ public class GUIButton {
 	public GUIButton addLore(String newLine) {
 		Validate.notNull(newLine);
 		String line = Util.color(newLine);
-		applyMeta(m -> m.setLore(Util.add(getFromMeta(l -> l.getLore()), line)));
+		applyMeta(m -> m.setLore(Util.add(getFromMeta(ItemMeta::getLore), line)));
 		return this;
 	}
 
@@ -138,9 +138,9 @@ public class GUIButton {
 	}
 
 	public GUIButton clearEnchantments() {
-		if (!getFromMeta(m -> m.hasEnchants()))
+		if (!getFromMeta(ItemMeta::hasEnchants))
 			return this;
-		for (Enchantment ench : getFromMeta(ItemMeta.class, m -> m.getEnchants()).keySet())
+		for (Enchantment ench : getFromMeta(ItemMeta.class, ItemMeta::getEnchants).keySet())
 			removeEnchantment(ench);
 		return this;
 	}
@@ -151,7 +151,7 @@ public class GUIButton {
 	}
 
 	public GUIButton clearPotionEffects() {
-		applyMeta(PotionMeta.class, m -> m.clearCustomEffects());
+		applyMeta(PotionMeta.class, PotionMeta::clearCustomEffects);
 		return this;
 	}
 
@@ -188,7 +188,7 @@ public class GUIButton {
 	}
 
 	public ItemStack toItemStack() {
-		Material mat = null;// NMS.fromLegacy(type, data);
+		Material mat = null;
 		ItemStack item;
 		mat = Material.valueOf(type.toUpperCase());
 		if (!is13()) {
@@ -200,25 +200,24 @@ public class GUIButton {
 		}
 
 		if (im == null) {
-			im = im == null ? factory.getItemMeta(mat) : factory.asMetaFor(im, mat);
-			pendant.forEach(a -> a.apply());
+			im = factory.getItemMeta(mat);
+			pendant.forEach(MetaApplier::apply);
 		}
 
 		item.setItemMeta(im);
 
-		if (im instanceof SkullMeta)
-			if (profile != null) {
-				SkullMeta sm = (SkullMeta) item.getItemMeta();
-				setProfile(item, sm);
-			}
+		if (im instanceof SkullMeta && profile != null) {
+			SkullMeta sm = (SkullMeta) item.getItemMeta();
+			setProfile(item, sm);
+		}
 		return item;
 
 	}
 
 	@SuppressWarnings("unchecked")
 	public <T extends ItemMeta, R> R getFromMeta(Function<T, R> metaRetriever) {
-		Class<T> type = (Class<T>) ItemMeta.class;
-		return getFromMeta(type, metaRetriever);
+		Class<T> metaType = (Class<T>) ItemMeta.class;
+		return getFromMeta(metaType, metaRetriever);
 	}
 
 	public <T extends ItemMeta, R> R getFromMeta(Class<T> metaType, Function<T, R> metaRetriever) {
@@ -231,8 +230,8 @@ public class GUIButton {
 
 	@SuppressWarnings("unchecked")
 	public <T extends ItemMeta> GUIButton applyMeta(Consumer<T> metaApplier) {
-		Class<T> type = (Class<T>) ItemMeta.class;
-		return applyMeta(type, metaApplier);
+		Class<T> metaType = (Class<T>) ItemMeta.class;
+		return applyMeta(metaType, metaApplier);
 	}
 
 	public <T extends ItemMeta> GUIButton applyMeta(Class<T> metaType, Consumer<T> metaApplier) {
@@ -260,7 +259,7 @@ public class GUIButton {
 		try {
 			profileField = skullMeta.getClass().getDeclaredField("profile");
 		} catch (NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
+			Util.exception(e);
 		}
 
 		if (profileField != null) {
@@ -272,7 +271,7 @@ public class GUIButton {
 				profileField.set(skullMeta, profile);
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
+			Util.exception(e);
 		}
 
 		item.setItemMeta(skullMeta);

@@ -3,7 +3,9 @@ package me.mrmaurice.lib;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class MisterLib {
 
 	public static void check() {

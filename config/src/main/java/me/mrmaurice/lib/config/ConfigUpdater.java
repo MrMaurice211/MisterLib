@@ -13,7 +13,9 @@ import me.mrmaurice.lib.utils.Util;
 public class ConfigUpdater {
 
 	@Builder.Default
-	private int newVersion = 1, oldVersion = 1;
+	private int newVersion = 1;
+	@Builder.Default
+	private int oldVersion = 1;
 	@Builder.Default
 	private boolean instantDeprecated = false;
 	@Builder.Default
@@ -65,7 +67,10 @@ public class ConfigUpdater {
 	private void deprecateConfig() {
 		Util.info("Now your config is deprecated please check your folder for re-setting it!");
 		File old = new File(path.getParentFile(), deprecatedName + ".yml");
-		path.renameTo(old);
+		if (!path.renameTo(old)) {
+			Util.error("Config couldnt be deprecated.");
+			return;
+		}
 		ConfigManager.of("config").reload();
 	}
 

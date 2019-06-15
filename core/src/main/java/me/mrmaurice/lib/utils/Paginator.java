@@ -13,7 +13,7 @@ public class Paginator<T> {
 
 	public Paginator(T[] objects, Integer max) {
 		this.objects = objects;
-		pagSize = new Double(max);
+		pagSize = max;
 		amountOfPages = (int) Math.ceil(objects.length / pagSize);
 	}
 

@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 import com.google.common.io.Files;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class StringUtil {
 
 	public static String cutName(String name) {
@@ -53,9 +56,9 @@ public class StringUtil {
 
 		if (a.length == 0)
 			return Character.toTitleCase(str.charAt(0)) + str.substring(1).toLowerCase();
-		str = "";
+		StringBuilder sb = new StringBuilder();
 		for (String s : a)
-			str += Character.toTitleCase(s.charAt(0)) + s.substring(1).toLowerCase() + " ";
+			sb.append(Character.toTitleCase(s.charAt(0)) + s.substring(1).toLowerCase() + " ");
 
 		return str.trim();
 	}
