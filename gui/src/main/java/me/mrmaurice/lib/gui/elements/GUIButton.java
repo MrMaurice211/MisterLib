@@ -29,6 +29,8 @@ import lombok.ToString;
 import me.mrmaurice.lib.gui.MenuGUI;
 import me.mrmaurice.lib.gui.enums.Icon;
 import me.mrmaurice.lib.gui.events.GUIEvent;
+import me.mrmaurice.lib.reflections.Reflections;
+import me.mrmaurice.lib.reflections.Version;
 import me.mrmaurice.lib.utils.Util;
 
 @ToString
@@ -188,9 +190,8 @@ public class GUIButton {
 	}
 
 	public ItemStack toItemStack() {
-		Material mat = null;
 		ItemStack item;
-		mat = Material.valueOf(type.toUpperCase());
+		Material mat = Material.valueOf(type.toUpperCase());
 		if (!is13()) {
 			item = new ItemStack(mat, amount, (short) data);
 		} else {
@@ -278,12 +279,7 @@ public class GUIButton {
 	}
 
 	private boolean is13() {
-		try {
-			Material.valueOf("LEGACY_AIR");
-			return true;
-		} catch (IllegalArgumentException e) {
-			return false;
-		}
+		return Reflections.getVersion().isAbove(Version.v12);
 	}
 
 }
