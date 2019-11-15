@@ -5,7 +5,7 @@ before_deploy:
 - export GRADLE_PATH=./build.gradle
 - export GRADLE_FIELD="version"
 - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
-- export VERSION=$(echo $VERSION_TMP | sed -e 's/^"//'  -e 's/"$//')
+- export VERSION=$(echo $VERSION_TMP | sed 's/"//g')
 - echo $VERSION
 - export GIT_TAG=$VERSION
 - git tag $GIT_TAG
@@ -18,7 +18,6 @@ cache:
   - "$HOME/.gradle/wrapper/"
 install: "./gradlew clean assemble"
 jdk:
-  - oraclejdk8
   - openjdk8
 deploy:
   provider: releases
