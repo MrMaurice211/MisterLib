@@ -6,10 +6,8 @@ before_deploy:
 - export GRADLE_FIELD="version"
 - export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
 - echo $VERSION_TMP
-- export VERSION=$(echo $VERSION_TMP | sed 's/"//g')
+- export VERSION=$(echo $VERSION_TMP | sed 's/"//g' | sed 's/^/"/' |sed 's/$/"/')
 - echo $VERSION
-- export GIT_TAG=$VERSION
-- echo $GIT_TAG
 - git tag $VERSION
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
