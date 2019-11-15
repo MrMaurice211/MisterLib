@@ -3,13 +3,9 @@ dist: trusty
 before_deploy:
 - git config --local user.name "MrMaurice211"
 - git config --local user.email "t_ulu_m@live.com.mx"
-- export GRADLE_PATH=./build.gradle
-- export GRADLE_FIELD="version"
-- export VERSION_TMP=$(grep $GRADLE_FIELD $GRADLE_PATH | awk '{print $2}')
-- echo $VERSION_TMP
-- export VERSION=$(echo $VERSION_TMP | sed 's/"//g' | sed 's/^/"/' |sed 's/$/"/')
-- echo $VERSION
-- git tag $VERSION
+- export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+- echo $TRAVIS_TAG
+- git tag $TRAVIS_TAG
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
