@@ -9,7 +9,8 @@ before_deploy:
 - export VERSION=$(echo $VERSION_TMP | sed 's/"//g')
 - echo $VERSION
 - export GIT_TAG=$VERSION
-- git tag $GIT_TAG
+- echo $GIT_TAG
+- git tag $VERSION
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
