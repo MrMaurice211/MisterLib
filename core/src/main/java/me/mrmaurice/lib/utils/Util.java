@@ -14,11 +14,9 @@ import org.bukkit.entity.Player;
 
 import com.google.common.collect.Lists;
 
-import lombok.experimental.UtilityClass;
 import me.mrmaurice.lib.MisterLib;
 import net.md_5.bungee.api.chat.TextComponent;
 
-@UtilityClass
 public class Util {
 
 	private static final String RESET = "\033[0m";

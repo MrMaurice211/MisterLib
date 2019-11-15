@@ -104,6 +104,10 @@ public class Reflections {
 		return classes;
 	}
 
+	public static ReClass getClass(Object obj) {
+		return getClass(obj.getClass());
+	}
+
 	public static ReClass getClass(Class<?> clazz) {
 		ReClass rc = getCache(clazz);
 

@@ -12,10 +12,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.google.common.collect.Lists;
 
 import lombok.Getter;
-import lombok.experimental.UtilityClass;
 import me.mrmaurice.lib.utils.Util;
 
-@UtilityClass
 public class ConfigManager {
 
 	private static File dataFolder;

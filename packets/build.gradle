@@ -6,5 +6,5 @@ repositories {
 dependencies {
   compileOnly 'org.inventivetalent.packetlistener:api:3.7.3-SNAPSHOT'
   compileOnly 'com.comphenix.protocol:ProtocolLib:4.4.0'
-  compileOnly project(':core')
+  compile project(':core')
 }
