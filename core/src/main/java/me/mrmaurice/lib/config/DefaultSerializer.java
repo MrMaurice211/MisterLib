@@ -1,8 +1,5 @@
 package me.mrmaurice.lib.config;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class DefaultSerializer implements ConfigSerializer<Object> {
 
 	// private Gson gson = new GsonBuilder().disableHtmlEscaping().create();

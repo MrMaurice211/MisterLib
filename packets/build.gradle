@@ -1,6 +1,6 @@
 repositories {
   maven { url = 'https://repo.inventivetalent.org/content/groups/public/' }
-  maven { url "http://repo.dmulloy2.net/nexus/repository/public/" }
+  maven { url = 'http://repo.dmulloy2.net/nexus/repository/public/' }
 }
 
 dependencies {

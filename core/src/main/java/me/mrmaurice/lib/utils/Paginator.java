@@ -1,18 +1,21 @@
 package me.mrmaurice.lib.utils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 @SuppressWarnings("unchecked")
 public class Paginator<T> {
 
-	private T[] objects;
+	private T dullObject;
+	private List<T> objects;
 	private double pagSize;
 	private int currentPage;
 	private int amountOfPages;
 
-	public Paginator(T[] objects, Integer max) {
-		this.objects = objects;
+	public Paginator(T[] objects, int max) {
+		this.objects = Lists.newLinkedList(Arrays.asList(objects));
 		pagSize = max;
 		amountOfPages = (int) Math.ceil(objects.length / pagSize);
 	}
@@ -22,8 +25,18 @@ public class Paginator<T> {
 	}
 
 	public void setElements(List<T> objectList) {
-		objects = objectList.toArray((T[]) new Object[0]);
-		amountOfPages = (int) Math.ceil(objects.length / pagSize);
+		objects = Lists.newLinkedList(objectList);
+		amountOfPages = (int) Math.ceil(objects.size() / pagSize);
+	}
+
+	public void addElement(T element) {
+		objects.add(element);
+		amountOfPages = (int) Math.ceil(objects.size() / pagSize);
+	}
+
+	public void delElement(T element) {
+		objects.remove(element);
+		amountOfPages = (int) Math.ceil(objects.size() / pagSize);
 	}
 
 	public boolean hasNext() {
@@ -50,19 +63,35 @@ public class Paginator<T> {
 		return currentPage;
 	}
 
-	public List<T> getPage(int pageNum) {
-		List<T> page = new ArrayList<>();
+	public void setCurrent(int pageNum) {
 		currentPage = pageNum;
+	}
 
-		if (objects.length == 0)
+	public void setDullObject(T object) {
+		dullObject = object;
+	}
+
+	public T getDullObject() {
+		return dullObject;
+	}
+
+	public List<T> getPage() {
+		List<T> page = Lists.newLinkedList();
+
+		if (objects.size() == 0) {
+			for (int i = 0; i < pagSize; i++)
+				page.add(dullObject);
 			return page;
+		}
 
-		double startC = pagSize * (pageNum - 1);
+		double startC = pagSize * (currentPage - 1);
 		double finalC = startC + pagSize;
 
 		for (; startC < finalC; startC++)
-			if (startC < objects.length)
-				page.add(objects[(int) startC]);
+			if (startC < objects.size())
+				page.add(objects.get((int) startC));
+			else
+				page.add(dullObject);
 		return page;
 
 	}

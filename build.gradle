@@ -1,11 +1,7 @@
-plugins {
-  id "org.sonarqube" version "2.7"
-}
-
 allprojects {
   apply plugin: 'java'
   apply plugin: 'maven'
-  version "1.0.3-GUI"
+  version "1.0.4-GUI"
 
   repositories {
     maven { url "http://mrmaurice.me:8081/repository/mister-repo/" }

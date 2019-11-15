@@ -20,8 +20,12 @@ public class GUIToolbar {
 	public GUIToolbar() {
 		this(1);
 	}
+	
+	public GUIButton get(int slot) {
+		return toolbar.getOrDefault(slot, null);
+	}
 
-	public void set(Integer slot, GUIButton butt) {
+	public void set(int slot, GUIButton butt) {
 		if (slot < 0 || slot > 8)
 			return;
 		toolbar.put(slot, butt);

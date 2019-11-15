@@ -46,7 +46,7 @@ public class GUIListener implements Listener {
 
 		InventoryHolder holder = inv.getHolder();
 
-		if (!(holder instanceof GUI))
+		if (!(holder instanceof MenuGUI))
 			return;
 
 		MenuGUI gui = (MenuGUI) holder;
@@ -65,7 +65,7 @@ public class GUIListener implements Listener {
 		Consumer<InventoryCloseEvent> listener = gui.getCloseListener();
 
 		if (listener != null)
-			listener.accept(event);
+			TaskUtil.runLater(() -> listener.accept(event), 1);
 
 	}
 

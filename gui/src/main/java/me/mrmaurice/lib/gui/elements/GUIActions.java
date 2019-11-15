@@ -2,13 +2,10 @@ package me.mrmaurice.lib.gui.elements;
 
 import java.util.function.Consumer;
 
-import org.bukkit.inventory.Inventory;
-
 import me.mrmaurice.lib.gui.GUI;
 import me.mrmaurice.lib.gui.MenuGUI;
 import me.mrmaurice.lib.gui.events.GUIEvent;
 
-import org.bukkit.conversations.Conversation;
 import org.bukkit.entity.Player;
 
 public class GUIActions {
@@ -25,10 +22,7 @@ public class GUIActions {
 		Player player = event.getResponsible();
 		gui.setData(REASON, "return");
 		gui.close(player);
-		if (parent instanceof MenuGUI)
-			player.openInventory((Inventory) gui.build());
-		else
-			((Conversation) gui.build()).begin();
+		gui.open(player);
 	};
 
 	public static final Consumer<GUIEvent> HARD_RETURN = event -> {
@@ -39,10 +33,7 @@ public class GUIActions {
 		Player player = event.getResponsible();
 		gui.setData(REASON, "hard_return");
 		gui.close(player);
-		if (parent instanceof MenuGUI)
-			player.openInventory((Inventory) gui.build());
-		else
-			((Conversation) gui.build()).begin();
+		gui.open(player);
 	};
 
 	public static final Consumer<GUIEvent> UPDATE = event -> {
@@ -76,7 +67,7 @@ public class GUIActions {
 					throw new IllegalArgumentException("Child GUI " + data + " does not exists.");
 				gui.setData(REASON, "hide");
 				gui.close(event.getResponsible());
-				child.build();
+				child.open(event.getResponsible());
 			};
 		}
 
