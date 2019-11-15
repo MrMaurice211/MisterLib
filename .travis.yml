@@ -16,6 +16,9 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 install: "./gradlew clean assemble"
+jdk:
+  - oraclejdk8
+  - openjdk8
 deploy:
   provider: releases
   file_glob: true
@@ -25,10 +28,3 @@ deploy:
   file: "*/build/libs/*.jar"
   on:
     repo: MrMaurice211/MisterLib
-addons:
-  sonarcloud:
-    organization: mrmaurice211-github
-    token:
-      secure: "XpGkh0Uynr2rV3xp6wYD0lgdHaEAbWDc9oHRZU3+biSnp21xe9EkKOEIhnUV6ppmQxU8HpuwzeUqmEHnpmVrObuSZm5u3nv3YeDiaq+AqhdYGpXbN1TQq2sXcujUfusWLwDCkCoQcc37ZK6hhnIk7q8th6yon3D3oL5JVt7QdHXrV1hdvNa9RZGFnf5+wwLO6bwHEIzFu5wBZD+YYx+rz9a6L/ILMhVozT46sYrI2WZP7P7o0l1pYxn2CWmQUbQjJNneg+BBZccjkWA4T4cnO68XfL76MEmeLcGIfZFoQbKCUEb8CyQ2DnDAAy6WBJxPYFmdrVuu6BEVEBMXoAKlnyyODt8umVYnvFTh9k5d+8HKyQ+BG2tMOv6zIoEJ6qxuQN1EGSVIAqQWfMOK4DrDwxXpZGwP7pjaUaOahHmlz93VKKKFxKT7O09DJWjnJaBFwVc3n8Mw2Tfw44dl3uAzDQRPUNln5PAxd53k401Zech8y4Fr9mrPEj3sYetqpupCEhivCsUCMQ9cZzdNZFBmlMF87vxV7/6M+fB0d25nNUTuxU1bzTaLrgRtv1xkQx3HQYeQ4joTzEZw1HL+Y5Uy1Nro6t5GRphdbpd8Tg6SDOUJpOkr5kLN7XdKD0qepOqP/c9VN1OgvyLD3N2+hLLZIP3eHeP2ThasxWCijAye5fc="
-script:
-- sonar-scanner
