@@ -47,7 +47,7 @@ public class GUIButton {
 	private List<MetaApplier> pendant = Lists.newCopyOnWriteArrayList();
 
 	public GUIButton(String mat) {
-		type = mat;
+		type = mat.toUpperCase();
 	}
 
 	public GUIButton(Material mat) {
@@ -68,7 +68,7 @@ public class GUIButton {
 
 	public GUIButton withType(Material newType) {
 		Validate.notNull(newType);
-		type = newType.toString();
+		type = newType.toString().toUpperCase();
 		return this;
 	}
 
@@ -191,7 +191,12 @@ public class GUIButton {
 
 	public ItemStack toItemStack() {
 		ItemStack item;
-		Material mat = Material.valueOf(type.toUpperCase());
+		Material mat;
+		if (data != 0)
+			mat = Reflections.getVersion().getBiMaterialProvider().apply(type, data);
+		else
+			mat = Reflections.getVersion().getMaterialProvider().apply(type);
+
 		if (!is13()) {
 			item = new ItemStack(mat, amount, (short) data);
 		} else {

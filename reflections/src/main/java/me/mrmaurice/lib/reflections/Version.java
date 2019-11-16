@@ -1,6 +1,13 @@
 package me.mrmaurice.lib.reflections;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+
+import org.bukkit.Material;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public enum Version {
 
@@ -15,10 +22,18 @@ public enum Version {
 
 	private String realName;
 	private int numVersion;
+	@Setter
+	@Getter
+	private Function<String, Material> materialProvider;
+	@Setter
+	@Getter
+	private BiFunction<String, Byte, Material> biMaterialProvider;
 
 	Version(String value, int ver) {
 		realName = value;
 		numVersion = ver;
+		materialProvider = s -> Material.matchMaterial(s);
+		biMaterialProvider = (st, sh) -> Material.matchMaterial(st);
 	}
 
 	public boolean isAbove(Version ver) {
