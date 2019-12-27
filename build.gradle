@@ -1,15 +1,15 @@
 subprojects {
   apply plugin: 'java'
   apply plugin: 'maven'
-  version "1.0.7-GUI"
+  version "1.0.8-GUI"
 
   repositories {
-    maven { url "http://mrmaurice.me:8081/repository/mister-repo/" }
+    maven { url = 'https://repo.codemc.io/repository/nms-local/' }
     mavenCentral()
   }
 
   dependencies {
-    compileOnly('org.spigotmc:spigot:1.10.2-R0.1'){
+    compileOnly('org.spigotmc:spigot:1.10.2-R0.1-SNAPSHOT'){
         transitive = false
     }
     compileOnly 'org.projectlombok:lombok:1.18.10'
