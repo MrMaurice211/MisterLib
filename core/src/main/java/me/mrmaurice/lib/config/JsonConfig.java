@@ -1,16 +1,11 @@
 package me.mrmaurice.lib.config;
 
-import java.util.Map;
-
-import com.google.common.collect.Maps;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 public class JsonConfig {
 
 	// private static JsonParser parser = new JsonParser();
-	private static Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-	private Map<String, Object> values = Maps.newHashMap();
+	// private static Gson gson = new
+	// GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	// private Map<String, Object> values = Maps.newHashMap();
 	// private static Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 	//
 	// private Map<String, JsonElement> values = Maps.newHashMap();

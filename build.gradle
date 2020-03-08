@@ -1,18 +1,40 @@
-subprojects {
+plugins {
+  id 'java'
+  id 'com.github.johnrengelman.shadow' version '5.1.0'
+  id 'maven'
+}
+
+allprojects {
+
   apply plugin: 'java'
-  apply plugin: 'maven'
-  version "1.0.9-GUI"
+
+  group = 'me.mrmaurice.lib'
+  version = "1.0.10-GUI"
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
 
   repositories {
-    maven { url = 'https://repo.codemc.io/repository/nms-local/' }
-    mavenCentral()
-  }
-
-  dependencies {
-    compileOnly('org.spigotmc:spigot:1.10.2-R0.1-SNAPSHOT'){
-        transitive = false
+      maven { url = 'https://repo.codemc.io/repository/nms-local/' }
+      mavenCentral()
     }
+    
+  dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
   }
+    
+}
+
+dependencies {
+  compile project(':core')
+  compile project(':config')
+  compile project(':gui')
+  compile project(':packets')
+  compile project(':reflections')
+}
+
+shadowJar {
+  baseName = 'MisterLib'
+  classifier = 'all'
 }

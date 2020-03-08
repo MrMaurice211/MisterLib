@@ -34,6 +34,7 @@ import me.mrmaurice.lib.reflections.Version;
 import me.mrmaurice.lib.utils.Util;
 
 @ToString
+@SuppressWarnings("deprecation")
 public class GUIButton {
 
 	private static ItemFactory factory = Bukkit.getItemFactory();
@@ -85,11 +86,6 @@ public class GUIButton {
 
 	public GUIButton withData(int newData) {
 		data = (byte) newData;
-		return this;
-	}
-
-	public GUIButton setUnbreakable(boolean unbreakable) {
-		im.spigot().setUnbreakable(unbreakable);
 		return this;
 	}
 
