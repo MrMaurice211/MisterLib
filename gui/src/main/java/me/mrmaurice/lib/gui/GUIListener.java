@@ -54,7 +54,7 @@ public class GUIListener implements Listener {
 		String data = gui.getData("close_reason");
 
 		if (data != null)
-			if (data.equalsIgnoreCase("hide"))
+			if (!data.equalsIgnoreCase("close"))
 				return;
 
 		if (!gui.isCloseable()) {

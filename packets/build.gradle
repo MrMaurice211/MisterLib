@@ -8,4 +8,5 @@ dependencies {
   compileOnly 'com.comphenix.protocol:ProtocolLib:4.5.0'
   compileOnly 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
   compile project(':core')
+  compile project(':reflections')
 }

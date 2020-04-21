@@ -1,15 +1,15 @@
 plugins {
   id 'java'
   id 'com.github.johnrengelman.shadow' version '5.1.0'
-  id 'maven'
 }
 
 allprojects {
 
   apply plugin: 'java'
+  apply plugin: 'maven'
 
   group = 'me.mrmaurice.lib'
-  version = "1.0.10-GUI"
+  version = "1.0.11-GUI"
 
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
@@ -20,8 +20,8 @@ allprojects {
     }
     
   dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
   }
     
 }

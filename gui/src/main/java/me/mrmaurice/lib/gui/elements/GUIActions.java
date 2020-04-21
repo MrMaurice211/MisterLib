@@ -21,7 +21,8 @@ public class GUIActions {
 			return;
 		Player player = event.getResponsible();
 		gui.setData(REASON, "return");
-		gui.close(player);
+//		gui.close(player);
+//		Bukkit.getScheduler().runTaskLater(Guis.getInstance(), () -> gui.open(player), 1);
 		gui.open(player);
 	};
 
@@ -32,7 +33,7 @@ public class GUIActions {
 			return;
 		Player player = event.getResponsible();
 		gui.setData(REASON, "hard_return");
-		gui.close(player);
+//		gui.close(player);
 		gui.open(player);
 	};
 
