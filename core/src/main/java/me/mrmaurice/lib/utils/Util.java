@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import me.mrmaurice.lib.MisterLib;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.google.common.collect.Lists;
 
-import me.mrmaurice.lib.MisterLib;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class Util {

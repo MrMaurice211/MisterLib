@@ -23,7 +23,7 @@ public class GUIActions {
 		gui.setData(REASON, "return");
 //		gui.close(player);
 //		Bukkit.getScheduler().runTaskLater(Guis.getInstance(), () -> gui.open(player), 1);
-		gui.open(player);
+		parent.open(player);
 	};
 
 	public static final Consumer<GUIEvent> HARD_RETURN = event -> {
@@ -34,7 +34,7 @@ public class GUIActions {
 		Player player = event.getResponsible();
 		gui.setData(REASON, "hard_return");
 //		gui.close(player);
-		gui.open(player);
+		parent.open(player);
 	};
 
 	public static final Consumer<GUIEvent> UPDATE = event -> {

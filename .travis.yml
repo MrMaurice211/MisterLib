@@ -2,7 +2,7 @@ language: java
 before_deploy:
 - git config --local user.name "MrMaurice211"
 - git config --local user.email "t_ulu_m@live.com.mx"
-- export TRAVIS_TAG="1.0.11-GUI"
+- export TRAVIS_TAG="1.0.12-GUI"
 - echo $TRAVIS_TAG
 - git tag $TRAVIS_TAG
 before_cache:
