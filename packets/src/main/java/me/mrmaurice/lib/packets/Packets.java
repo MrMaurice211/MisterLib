@@ -2,13 +2,11 @@ package me.mrmaurice.lib.packets;
 
 import java.util.List;
 
-import org.bukkit.plugin.java.JavaPlugin;
-
 import com.google.common.collect.Lists;
-
 import lombok.Getter;
 import me.mrmaurice.lib.packets.events.PacketInEvent;
 import me.mrmaurice.lib.packets.events.PacketOutEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class Packets {
 
