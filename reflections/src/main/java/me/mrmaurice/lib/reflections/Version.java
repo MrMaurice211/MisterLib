@@ -19,10 +19,11 @@ public enum Version {
 	v12("v1_12_R1", 12),
 	v13("v1_13_R2", 13),
 	V14("v1_14_R1", 14),
-	V15("v1_15_R1", 15);
+	V15("v1_15_R1", 15),
+	V16("v1_16_R2", 16);
 
-	private String realName;
-	private int numVersion;
+	private final String realName;
+	private final int numVersion;
 	@Setter
 	@Getter
 	private Function<String, Material> materialProvider;
