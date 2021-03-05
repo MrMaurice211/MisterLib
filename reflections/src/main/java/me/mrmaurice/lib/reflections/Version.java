@@ -20,7 +20,7 @@ public enum Version {
 	v13("v1_13_R2", 13),
 	V14("v1_14_R1", 14),
 	V15("v1_15_R1", 15),
-	V16("v1_16_R2", 16);
+	V16("v1_16_R3", 16);
 
 	private final String realName;
 	private final int numVersion;
