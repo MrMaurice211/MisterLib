@@ -1,11 +1,11 @@
 repositories {
-  maven { url = 'https://repo.inventivetalent.org/content/groups/public/' }
+  maven { url = 'https://jitpack.io' }
   maven { url = 'http://repo.dmulloy2.net/nexus/repository/public/' }
 }
 
 dependencies {
+  compileOnly 'com.github.InventivetalentDev:PacketListenerAPI:3.8.0-SNAPSHOT'
   compileOnly 'com.comphenix.protocol:ProtocolLib:4.5.0'
-  compileOnly 'org.inventivetalent.packetlistener:api:3.7.9-SNAPSHOT'
   compileOnly 'org.spigotmc:spigot:1.15.2-R0.1-SNAPSHOT'
   compile project(':core')
   compile project(':reflections')

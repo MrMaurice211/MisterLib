@@ -34,7 +34,7 @@ public enum Version {
 	Version(String value, int ver) {
 		realName = value;
 		numVersion = ver;
-		materialProvider = s -> Material.matchMaterial(s);
+		materialProvider = Material::matchMaterial;
 		biMaterialProvider = (st, sh) -> Material.matchMaterial(st);
 	}
 
