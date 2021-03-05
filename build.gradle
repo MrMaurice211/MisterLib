@@ -9,7 +9,7 @@ allprojects {
   apply plugin: 'maven'
 
   group = 'me.mrmaurice.lib'
-  version = "1.0.15-GUI"
+  version = "1.0.16-GUI"
 
   sourceCompatibility = 1.8
   targetCompatibility = 1.8

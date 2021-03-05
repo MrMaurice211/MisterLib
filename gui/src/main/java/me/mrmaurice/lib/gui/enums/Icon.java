@@ -6,6 +6,9 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
 import me.mrmaurice.lib.gui.elements.GUIButton;
+import me.mrmaurice.lib.reflections.Reflections;
+import me.mrmaurice.lib.reflections.Version;
+import org.bukkit.Material;
 
 public enum Icon {
 	PREV("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjg0ZjU5NzEzMWJiZTI1ZGMwNThhZjg4OGNiMjk4MzFmNzk1OTliYzY3Yzk1YzgwMjkyNWNlNGFmYmEzMzJmYyJ9fX0="),
@@ -23,7 +26,7 @@ public enum Icon {
 			"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODFmYjhjZTY0MDhhNTg1MTM4NGUxYzJlZjc1Mzg1MWVhYzE4YmE0MDE4MjY2Y2RkNjY5ZGM5NDQ4NzNkNDIifX19"),
 	SORT("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTg2ZDcxOWJlZGZlMzdlM2Q3NWM1NzIzZDc1ZTUwN2Y4ZDI0Nzg2MjViZDc4YjMxZjQyMjM0ZDFkNTE2NzZlYyJ9fX0=");
 
-	private String value;
+	final String value;
 
 	Icon(String value) {
 		this.value = value;
@@ -36,7 +39,9 @@ public enum Icon {
 	}
 
 	public GUIButton button() {
-		return new GUIButton("SKULL_ITEM").withData(3).withProfile(this);
+		boolean is13 = Reflections.getVersion().isAbove(Version.v12);
+		String material = is13 ? "PLAYER_HEAD" : "SKULL_ITEM";
+		return new GUIButton(Material.matchMaterial(material)).withData(3).withProfile(this);
 	}
 
 }
